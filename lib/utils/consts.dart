@@ -1,0 +1,1 @@
+const isImagesMemory = false;
