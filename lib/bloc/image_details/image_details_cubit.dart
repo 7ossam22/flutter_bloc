@@ -24,4 +24,6 @@ class ImageDetailsCubit extends Cubit<ImageDetailsState> {
     }
     return image;
   }
+
+  dispose() => close();
 }

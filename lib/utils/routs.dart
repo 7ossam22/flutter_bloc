@@ -12,21 +12,21 @@ import 'package:scrappler_modified/screens/splash/splash_screen.dart';
 import '../logic/implementation/pixiv_logic.dart';
 
 class AppRouting {
-  late HomeCubit homeCubit;
-  late ImageDetailsCubit imageDetailsCubit;
-  late DataBaseLogicImp db;
-  late PixivLogicImp logic;
+  // late HomeCubit homeCubit;
+  // // late ImageDetailsCubit imageDetailsCubit;
+  // late DataBaseLogicImp db;
+  // late PixivLogicImp logic;
 
-  AppRouting() {
-    _init();
-  }
+  // AppRouting() {
+  //   _init();
+  // }
 
-  _init() {
-    logic = PixivLogicImp();
-    db = DataBaseLogicImp();
-    homeCubit = HomeCubit(logic: logic);
-    imageDetailsCubit = ImageDetailsCubit(logic: logic, db: db);
-  }
+  // _init() {
+  //   logic = PixivLogicImp();
+  //   // db = DataBaseLogicImp();
+  //   homeCubit = HomeCubit(logic: logic);
+  //   // imageDetailsCubit = ImageDetailsCubit(logic: logic, db: db);
+  // }
 
   Route generateRout(RouteSettings settings) {
     switch (settings.name) {
@@ -34,15 +34,11 @@ class AppRouting {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case '/home':
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (context) => homeCubit, child: const HomeScreen()));
+            builder: (_) => const HomeScreen());
       case '/image_details':
         final imageArgs = settings.arguments as ImageModel;
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (context) => imageDetailsCubit,
-                  child: ImageDetailsScreen(image: imageArgs),
-                ));
+            builder: (_) => ImageDetailsScreen(image: imageArgs));
       default:
         return MaterialPageRoute(
             builder: (_) => Container(
