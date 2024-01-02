@@ -4,9 +4,6 @@ import 'package:photo_view/photo_view.dart';
 import 'package:scrappler_modified/bloc/image_details/image_details_cubit.dart';
 import 'package:scrappler_modified/model/image.dart';
 
-import '../../logic/implementation/data_base_logic.dart';
-import '../../logic/implementation/pixiv_logic.dart';
-
 class ImageDetailsScreen extends StatefulWidget {
   final ImageModel image;
 
@@ -19,8 +16,6 @@ class ImageDetailsScreen extends StatefulWidget {
 class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
   late bool isFavorite;
   late ImageDetailsCubit bloc;
-  late DataBaseLogicImp db;
-  late PixivLogicImp logic;
   late ImageModel image;
 
   getImageOriginalData(ImageModel imageModel) async {
@@ -35,9 +30,7 @@ class _ImageDetailsScreenState extends State<ImageDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    db = DataBaseLogicImp();
-    logic = PixivLogicImp();
-    bloc = ImageDetailsCubit(logic: logic, db: db);
+    bloc = ImageDetailsCubit();
   }
 
   @override

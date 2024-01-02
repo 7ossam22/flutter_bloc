@@ -21,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
   String search = "";
   int gridViewOption = 1;
   late HomeCubit bloc;
-  late PixivLogicImp logic;
 
   getImagesData(String search) async {
     final images = await bloc.getAllImages(search);
@@ -33,8 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    logic = PixivLogicImp();
-    bloc = HomeCubit(logic: logic);
+    bloc = HomeCubit();
   }
 
   @override

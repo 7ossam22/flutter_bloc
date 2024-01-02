@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:scrappler_modified/logic/implementation/data_base_logic.dart';
@@ -8,11 +10,10 @@ import '../../model/image.dart';
 part 'image_details_state.dart';
 
 class ImageDetailsCubit extends Cubit<ImageDetailsState> {
-  final PixivLogicImp logic;
-  final DataBaseLogicImp db;
+  final PixivLogicImp logic = PixivLogicImp();
+  final DataBaseLogicImp db = DataBaseLogicImp();
 
-  ImageDetailsCubit({required this.logic, required this.db})
-      : super(ImageDetailsInitial());
+  ImageDetailsCubit() : super(ImageDetailsInitial());
 
   Future<ImageModel> getModelItem(ImageModel modelItem) async {
     emit(ImageDetailsLoading());

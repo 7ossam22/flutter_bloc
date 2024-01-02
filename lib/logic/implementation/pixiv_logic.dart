@@ -10,9 +10,11 @@ import '../../model/image.dart';
 import '../interface/core_logic.dart';
 
 class PixivLogicImp implements CoreLogic {
+  var pageNumber = 1;
+
   @override
   Future<List<ImageModel>> getData(Map<String, String> header, String query,
-      int pageNumber, String whereToSearch) async {
+      int? dontGive, String whereToSearch) async {
     List<ImageModel> modelItems = [];
     var url =
         'https://www.pixiv.net/ajax/search/artworks/$query?word=$query&order=date_d&mode=all&p=$pageNumber&s_mode=s_tag&type=all&lang=en&version=756be60366a5fe018a9a6dad3939c8a57e00ec57';
@@ -35,6 +37,7 @@ class PixivLogicImp implements CoreLogic {
             isFavorite: false,
             header: getHeader()));
       }).toList();
+      pageNumber++;
     } else {
       print(response.reasonPhrase);
     }

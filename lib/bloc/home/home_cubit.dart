@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -7,22 +9,19 @@ import '../../model/image.dart';
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  final PixivLogicImp logic;
+  final PixivLogicImp logic = PixivLogicImp();
   List<ImageModel> images = [];
 
-  HomeCubit({required this.logic}) : super(HomeInitial());
-  var lastItemId = 1;
+  HomeCubit() : super(HomeInitial());
 
   Future<List<ImageModel>> getAllImages(String query) async {
     emit(HomeLoadingState());
-    final images =
-        await logic.getData(logic.getHeader(), query, lastItemId, "");
+    final images = await logic.getData(logic.getHeader(), query, null, "");
     if (images.isNotEmpty) {
       for (ImageModel image in images) {
         this.images.add(image);
       }
       emit(HomeListLoaded(allImages: this.images));
-      lastItemId++;
     } else {
       emit(HomeErrorState());
     }

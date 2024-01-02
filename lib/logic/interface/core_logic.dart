@@ -8,7 +8,7 @@ abstract class CoreLogic {
   Future<Directory> initDirectory(String folderName);
 
   Future<List<ImageModel>> getData(Map<String, String> header, String query,
-      int pageNumber, String whereToSearch);
+      int? pageNumber, String whereToSearch);
 
   Future<ImageModel> getOriginalData(ImageModel modelItem);
 }
