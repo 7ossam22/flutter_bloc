@@ -3,8 +3,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
-import '../../logic/implementation/pixiv_logic.dart';
-import '../../model/image.dart';
+import '../../../logic/implementation/pixiv_logic.dart';
+import '../../../model/image.dart';
 
 part 'home_state.dart';
 

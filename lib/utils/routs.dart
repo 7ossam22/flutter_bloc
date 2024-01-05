@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrappler_modified/bloc/home/home_cubit.dart';
+import 'package:scrappler_modified/bloc/home/cubit/home_cubit.dart';
 import 'package:scrappler_modified/bloc/image_details/image_details_cubit.dart';
 import 'package:scrappler_modified/logic/implementation/data_base_logic.dart';
 import 'package:scrappler_modified/model/image.dart';

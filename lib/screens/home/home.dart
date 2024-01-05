@@ -1,7 +1,7 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrappler_modified/bloc/home/home_cubit.dart';
+import 'package:scrappler_modified/bloc/home/cubit/home_cubit.dart';
 import 'package:scrappler_modified/logic/implementation/pixiv_logic.dart';
 
 import '../../Drawable/customtextfield/CustomTextField.dart';
