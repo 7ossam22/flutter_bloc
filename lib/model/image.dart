@@ -25,6 +25,10 @@ class ImageModel implements IJsonSerializable {
       required this.header});
 
   @override
+  String toString() =>
+      "Image(id:$id,url:$url,title:$title,ts:$lastElementId,favorite:$isFavorite,header:$header)";
+
+  @override
   Map<String, dynamic> toJson() => {
         "id": id,
         "url": url,

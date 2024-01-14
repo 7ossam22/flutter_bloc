@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrappler_modified/bloc/splash/splash_cubit.dart';
+import 'package:scrappler_modified/bloc/splash/splash_cubit.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -57,42 +60,48 @@ class _SplashScreenState extends State<SplashScreen> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InkWell(
-                  onTap: () {},
-                  child: Image.asset(
-                    "assets/fetcher.png",
-                    width: 50,
-                    height: 50,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Image.asset(
-                    "assets/artstation.png",
-                    width: 50,
-                    height: 50,
-                  ),
-                ),
-                InkWell(
-                  onTap: () => Navigator.pushNamed(context, '/home'),
-                  child: Image.asset(
-                    "assets/pixiv.png",
-                    width: 50,
-                    height: 50,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Image.asset(
-                    "assets/uwu.gif",
-                    width: 50,
-                    height: 50,
-                  ),
-                )
-              ],
+            BlocBuilder<SplashCubit, SplashState>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                      onTap: () {},
+                      child: Image.asset(
+                        "assets/fetcher.png",
+                        width: 50,
+                        height: 50,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Image.asset(
+                        "assets/artstation.png",
+                        width: 50,
+                        height: 50,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () => context
+                          .read<SplashCubit>()
+                          .onNavigation(EngineToSearch.pixiv, context),
+                      child: Image.asset(
+                        "assets/pixiv.png",
+                        width: 50,
+                        height: 50,
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {},
+                      child: Image.asset(
+                        "assets/uwu.gif",
+                        width: 50,
+                        height: 50,
+                      ),
+                    )
+                  ],
+                );
+              },
             ),
             const SizedBox(
               height: 100,

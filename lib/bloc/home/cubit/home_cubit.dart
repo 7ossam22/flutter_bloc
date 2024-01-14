@@ -1,15 +1,16 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, avoid_print
 
 import 'package:bloc/bloc.dart';
+import 'package:injector/injector.dart';
 import 'package:meta/meta.dart';
 
-import '../../../logic/implementation/pixiv_logic.dart';
+import '../../../logic/interface/core_logic.dart';
 import '../../../model/image.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
-  final PixivLogicImp logic = PixivLogicImp();
+  final logic = Injector.appInstance.get<CoreLogic>();
   List<ImageModel> images = [];
 
   HomeCubit() : super(HomeInitial());
@@ -23,8 +24,25 @@ class HomeCubit extends Cubit<HomeState> {
       }
       emit(HomeListLoaded(allImages: this.images));
     } else {
+      addError("Images list is empty");
       emit(HomeErrorState());
     }
     return this.images;
+  }
+
+  @override
+  void onChange(Change<HomeState> change) {
+    super.onChange(change);
+    print("Home Cubit State changed - $change");
+  }
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    super.onError(error, stackTrace);
+    print("Home Cubit error - $error");
+  }
+
+  clear() {
+    images.clear();
   }
 }
