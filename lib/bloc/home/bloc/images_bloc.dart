@@ -39,6 +39,7 @@ class ImagesBloc extends Bloc<ImagesEvent, ImagesState> {
 
   void _clearImages(ImagesClearRequested event, Emitter emit) {
     images = [];
+    logic.clearSearchData();
     emit(ImagesLoaded(images: images));
   }
 }

@@ -144,4 +144,9 @@ class PixivLogicImp implements CoreLogic {
       //
     };
   }
+
+  @override
+  void clearSearchData() {
+    pageNumber = 1;
+  }
 }

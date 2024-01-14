@@ -20,8 +20,10 @@ class _HomeScreenState extends State<HomeScreen> {
   String search = "";
   int gridViewOption = 1;
   late ImagesBloc bloc;
+  bool loadMore = false;
 
   getImagesData(String search) async {
+    loadMore = true;
     bloc.add(ImagesRequestedWithQuery(query: search));
   }
 
@@ -40,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         if (state is ImagesLoaded) {
           images = state.images;
+          loadMore = false;
         }
       },
       builder: (context, state) => Scaffold(
@@ -125,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 shrinkWrap: true,
                                 mainAxisSpacing: 0,
                                 builder: (context, index) {
-                                  if (index == images.length - 1) {
+                                  if (index == images.length - 1 && !loadMore) {
                                     getImagesData(search);
                                   }
                                   return Stack(
