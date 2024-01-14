@@ -1,9 +1,8 @@
 import 'package:dynamic_height_grid_view/dynamic_height_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrappler_modified/bloc/home/cubit/home_cubit.dart';
-import 'package:scrappler_modified/logic/implementation/pixiv_logic.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:scrappler_modified/bloc/home/bloc/images_bloc.dart';
 import '../../Drawable/customtextfield/CustomTextField.dart';
 import '../../Drawable/imageview/image_view.dart';
 import '../../model/image.dart';
@@ -20,26 +19,30 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ImageModel> images = [];
   String search = "";
   int gridViewOption = 1;
-  late HomeCubit bloc;
+  late ImagesBloc bloc;
 
   getImagesData(String search) async {
-    final images = await bloc.getAllImages(search);
-    setState(() {
-      this.images = images;
-    });
+    bloc.add(ImagesRequestedWithQuery(query: search));
   }
 
   @override
   void initState() {
     super.initState();
-    bloc = HomeCubit();
+    bloc = context.read<ImagesBloc>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => bloc,
-      child: Scaffold(
+    return BlocConsumer<ImagesBloc, ImagesState>(
+      listener: (context, state) {
+        if (state is ImagesError) {
+          Fluttertoast.showToast(msg: state.err);
+        }
+        if (state is ImagesLoaded) {
+          images = state.images;
+        }
+      },
+      builder: (context, state) => Scaffold(
         body: Container(
           color: Theme.of(context).colorScheme.background,
           child: SafeArea(
@@ -71,13 +74,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   PrimaryTextFieldWithHeader(
                       isObscure: false,
                       hintText: "What are you looking for",
-                      onChangedValue: (value) => setState(() {
-                            if (value != search) {
-                              images.clear();
-                            }
-                            search = value;
-                            getImagesData(search);
-                          }),
+                      onChangedValue: (value) {
+                        if (value != search) {
+                          bloc.add(ImagesClearRequested());
+                        }
+                        search = value;
+                        getImagesData(search);
+                      },
                       backgroundColor: Theme.of(context).colorScheme.secondary,
                       isEditable: true,
                       isRequired: true,
@@ -97,23 +100,21 @@ class _HomeScreenState extends State<HomeScreen> {
                               Icons.grid_view,
                               color: Theme.of(context).colorScheme.secondary,
                             )),
-                        BlocBuilder<HomeCubit, HomeState>(
-                            builder: (context, state) =>
-                                state is HomeLoadingState
-                                    ? const Center(
-                                        child: SizedBox(
-                                          width: 30,
-                                          height: 30,
-                                          child: Padding(
-                                            padding: EdgeInsets.all(8.0),
-                                            child: CircularProgressIndicator(
-                                              color: Colors.black,
-                                              strokeWidth: 2,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    : const SizedBox()),
+                        state is ImagesLoading
+                            ? const Center(
+                                child: SizedBox(
+                                  width: 30,
+                                  height: 30,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(8.0),
+                                    child: CircularProgressIndicator(
+                                      color: Colors.black,
+                                      strokeWidth: 2,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(),
                       ]),
                   Expanded(
                     child: Center(
@@ -126,7 +127,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builder: (context, index) {
                                   if (index == images.length - 1) {
                                     getImagesData(search);
-                                    // viewModel.getItemsList(search);
                                   }
                                   return Stack(
                                     textDirection: TextDirection.rtl,

@@ -2,6 +2,10 @@ part of 'images_bloc.dart';
 
 sealed class ImagesEvent {}
 
-class ImagesLoadedEvent extends ImagesEvent {}
+class ImagesRequestedWithQuery extends ImagesEvent {
+  final String query;
 
-class ImageErrorEvent extends ImagesEvent {}
+  ImagesRequestedWithQuery({required this.query});
+}
+
+class ImagesClearRequested extends ImagesEvent {}

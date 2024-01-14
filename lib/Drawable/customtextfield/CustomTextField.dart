@@ -168,11 +168,11 @@ class _PrimaryTextFieldWithHeaderState
                                           "${phonePrefix.prefix} (${phonePrefix.shortCode})"))
                                   : const SizedBox(),
                               value: phonePrefix,
-                              onChanged: (newVal) => setState(() {
-                                    phonePrefix = newVal ?? phonePrefixes.first;
-                                    widget.onChangedValue(
-                                        phonePrefix.prefix + valueBuffer);
-                                  })),
+                              onChanged: (newVal) {
+                                phonePrefix = newVal ?? phonePrefixes.first;
+                                widget.onChangedValue(
+                                    phonePrefix.prefix + valueBuffer);
+                              }),
                         ),
                         const SizedBox(
                           width: 10,

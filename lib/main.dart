@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:scrappler_modified/bloc/app_bloc_observer.dart';
 import 'package:scrappler_modified/utils/routs.dart';
 
 void main() {
+  Bloc.observer = AppBlocObserver();
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle

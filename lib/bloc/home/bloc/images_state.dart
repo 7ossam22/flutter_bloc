@@ -3,10 +3,10 @@ part of 'images_bloc.dart';
 abstract class ImagesState {}
 
 class ImagesInitial extends ImagesState {
-  final List<ImageModel> images;
-
-  ImagesInitial({required this.images});
+  ImagesInitial();
 }
+
+class ImagesLoading extends ImagesState {}
 
 class ImagesLoaded extends ImagesState {
   final List<ImageModel> images;
@@ -14,4 +14,8 @@ class ImagesLoaded extends ImagesState {
   ImagesLoaded({required this.images});
 }
 
-class ImageError extends ImagesState {}
+class ImagesError extends ImagesState {
+  final String err;
+
+  ImagesError(this.err);
+}
