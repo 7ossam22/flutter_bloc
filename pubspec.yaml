@@ -44,7 +44,7 @@ dependencies:
   darq: ^1.1.1
   universal_io: ^2.0.4
   http: ^0.13.5
-  carousel_slider: ^4.0.0
+  carousel_slider: ^4.2.1
   snippet_coder_utils: ^1.0.12
   flutter_keyboard_visibility: ^5.1.0
   introduction_screen: ^3.0.2

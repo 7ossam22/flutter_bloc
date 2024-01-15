@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:scrappler_modified/logic/implementation/data_base_logic.dart';
 
-import '../../logic/implementation/pixiv_logic.dart';
-import '../../model/image.dart';
+import '../../../logic/implementation/pixiv_logic.dart';
+import '../../../model/image.dart';
 
 part 'image_details_state.dart';
 

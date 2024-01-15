@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:darq/darq.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
@@ -65,7 +66,10 @@ class PixivLogicImp implements CoreLogic {
       finalModelItem = ImageModel(
           id: finalResponse["illustId"],
           title: finalResponse["illustTitle"],
-          url: [finalResponse["urls"]["original"]],
+          url: (subList ?? [])
+              .append(finalResponse["urls"]["original"])
+              .reverse()
+              .toList(),
           subImages: subList ?? [],
           lastElementId: 0,
           isFavorite: false,
