@@ -6,6 +6,8 @@ import 'package:scrappler_modified/bloc/splash/splash_cubit.dart';
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
+  static const String splashScreenRoute = "/";
+
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }

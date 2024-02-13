@@ -6,6 +6,7 @@ import 'package:scrappler_modified/model/image.dart';
 import 'package:scrappler_modified/screens/coming_soon/coming_soon.dart';
 import 'package:scrappler_modified/screens/home/home.dart';
 import 'package:scrappler_modified/screens/image_details/image_details.dart';
+import 'package:scrappler_modified/screens/images_list/images_list_screen.dart';
 import 'package:scrappler_modified/screens/splash/splash_screen.dart';
 
 import '../bloc/image_details/bloc/image_details_bloc.dart';
@@ -13,24 +14,33 @@ import '../bloc/image_details/bloc/image_details_bloc.dart';
 class AppRouting {
   Route generateRout(RouteSettings settings) {
     switch (settings.name) {
-      case '/':
+      case SplashScreen.splashScreenRoute:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => SplashCubit(),
                   child: const SplashScreen(),
                 ));
-      case '/home':
+      case HomeScreen.homeScreenRoute:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => ImagesBloc(),
                   child: const HomeScreen(),
                 ));
-      case '/image_details':
+      case ImageDetailsScreen.imageDetailsScreenRoute:
         final imageArgs = settings.arguments as ImageModel;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (context) => ImageDetailsBloc(),
                   child: ImageDetailsScreen(image: imageArgs),
+                ));
+      case ImagesListScreen.imageListScreenRoute:
+        final imagesListArgs = settings.arguments as List<String>;
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (_) => ImageDetailsBloc(),
+                  child: ImagesListScreen(
+                    images: imagesListArgs,
+                  ),
                 ));
       default:
         return MaterialPageRoute(

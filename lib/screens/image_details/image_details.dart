@@ -11,6 +11,8 @@ class ImageDetailsScreen extends StatefulWidget {
 
   const ImageDetailsScreen({super.key, required this.image});
 
+  static const String imageDetailsScreenRoute = '/image_details';
+
   @override
   State<ImageDetailsScreen> createState() => _ImageDetailsScreenState();
 }
