@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injector/injector.dart';
+import 'package:scrappler_modified/screens/home/home.dart';
 
 import '../../logic/implementation/data_base_logic.dart';
 import '../../logic/implementation/operation_logic.dart';
@@ -44,6 +45,6 @@ class SplashCubit extends Cubit<SplashState> {
         //     .registerSingleton<CoreLogic>(() => FabbeloLogicImp());
         break;
     }
-    Navigator.pushNamed(context, "/home");
+    Navigator.pushNamed(context, HomeScreen.homeScreenRoute);
   }
 }

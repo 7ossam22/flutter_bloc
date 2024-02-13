@@ -34,7 +34,7 @@ class AppRouting {
                   child: ImageDetailsScreen(image: imageArgs),
                 ));
       case ImagesListScreen.imageListScreenRoute:
-        final imagesListArgs = settings.arguments as List<String>;
+        final imagesListArgs = settings.arguments as ImageModel;
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
                   create: (_) => ImageDetailsBloc(),

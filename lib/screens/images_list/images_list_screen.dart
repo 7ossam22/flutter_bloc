@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:scrappler_modified/model/image.dart';
 
 class ImagesListScreen extends StatefulWidget {
-  final List<String> images;
+  final ImageModel images;
 
   const ImagesListScreen({super.key, required this.images});
 
@@ -12,6 +13,14 @@ class ImagesListScreen extends StatefulWidget {
 }
 
 class _ImagesListScreenState extends State<ImagesListScreen> {
+  List<String> imagesUrl = [];
+
+  @override
+  void didChangeDependencies() {
+    imagesUrl = widget.images.url;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();

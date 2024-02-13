@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:scrappler_modified/bloc/home/bloc/images_bloc.dart';
+import 'package:scrappler_modified/screens/image_details/image_details.dart';
 import '../../Drawable/customtextfield/CustomTextField.dart';
 import '../../Drawable/imageview/image_view.dart';
 import '../../model/image.dart';
@@ -139,7 +140,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ImageViewWithShimmerLoading(
                                         isFavoriteScreen: false,
                                         onTap: () => Navigator.pushNamed(
-                                            context, '/image_details',
+                                            context,
+                                            ImageDetailsScreen
+                                                .imageDetailsScreenRoute,
                                             arguments: images[index]),
                                         modelItem: images[index],
                                         isImageMemory: isImagesMemory,
